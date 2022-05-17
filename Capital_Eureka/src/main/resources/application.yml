@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: Capital-Eureka
+  profiles:
+    active: ${org.jxch.capital.eureka.env:dev}
