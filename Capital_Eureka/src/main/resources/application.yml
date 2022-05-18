@@ -1,5 +1,9 @@
 spring:
   application:
     name: Capital-Eureka
+  security:
+    user:
+      name: ${username:admin}
+      password: ${password:admin}
   profiles:
-    active: ${org.jxch.capital.eureka.env:dev}
+    active: ${env:dev}
