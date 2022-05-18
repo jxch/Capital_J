@@ -16,6 +16,7 @@
   <version>1.0-SNAPSHOT</version>
   <modules>
     <module>Capital_Eureka</module>
+    <module>Capital_DC_A</module>
   </modules>
 
   <name>Capital_Java</name>
