@@ -7,9 +7,13 @@
   instance:
     prefer-ip-address: true
 
-
-
  spring:
+   datasource:
+     hikari:
+       jdbc-url: jdbc:oracle:thin:@jdbctest_medium?TNS_ADMIN=${root:E:\cloud\Oracle\db}\wallet_db_capital
+     driver-class-name: oracle.jdbc.driver.OracleDriver
+     username: ADMIN
+     password: yKU41:;!WTg%+n4<=sn=acJ)hyZZp/
    application:
      name: Capital-DC-A
    profiles:
