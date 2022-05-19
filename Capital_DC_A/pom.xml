@@ -19,6 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+
+        <main.basedir>${project.basedir}/../</main.basedir>
     </properties>
 
     <dependencies>
@@ -50,6 +52,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.project</groupId>
+            <artifactId>ojdbc</artifactId>
+            <version>${project.parent.version}</version>
+            <scope>system</scope>
+            <systemPath>${main.basedir}/libs/ojdbc8-full/ojdbc8.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
