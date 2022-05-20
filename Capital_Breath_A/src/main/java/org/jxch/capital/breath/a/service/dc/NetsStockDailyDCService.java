@@ -9,6 +9,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 import org.jxch.capital.breath.a.model.StockKLine;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -22,7 +23,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class NetsStockDailyDCService implements StockDailyDC{
+public class NetsStockDailyDCService implements StockDailyDC {
     private Path folderPath;
     private final OkHttpClient okHttpClient;
 
@@ -32,16 +33,16 @@ public class NetsStockDailyDCService implements StockDailyDC{
 
     @PostConstruct
     private void init() {
-        Path folder = Paths.get("src/main/resources/stock/daily");
-        boolean desk = Files.exists(folder);
-        if (!desk) {
-            try {
+        try {
+            Path folder = new ClassPathResource("stock/daily").getFile().toPath();
+            boolean desk = Files.exists(folder);
+            if (!desk) {
                 Files.createDirectories(folder);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
             }
+            folderPath = Paths.get(folder.toAbsolutePath().toString());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        folderPath = Paths.get(folder.toAbsolutePath().toString());
     }
 
     @Override
@@ -57,7 +58,7 @@ public class NetsStockDailyDCService implements StockDailyDC{
             if (!shStockKLines.isEmpty()) {
                 return shStockKLines;
             }
-        }  catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             return getDailyKLineSortedByDate(szCode, start, end);
         }
 
