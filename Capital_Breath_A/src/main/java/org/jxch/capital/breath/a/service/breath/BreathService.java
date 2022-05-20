@@ -36,12 +36,6 @@ public class BreathService implements Breath {
             List<StockSectorScore> sectorScores = sectorScoreSortedByDate(stockSector.getName(), mkLines, stockSector.getCodes().size());
             breaths.add(sectorScores);
             log.info(stockSector.getName() + " success.");
-
-            try {
-                Thread.sleep(60000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
         }
         return breaths;
     }

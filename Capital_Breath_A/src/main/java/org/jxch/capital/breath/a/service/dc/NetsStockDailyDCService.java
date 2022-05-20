@@ -68,7 +68,8 @@ public class NetsStockDailyDCService implements StockDailyDC {
 
     public List<StockKLine> getDailyKLineSortedByDate(String code, Date start, Date end) {
         Path filePath = getFilePath(code);
-        Request request = new Request.Builder().url(getDownloadURL(code, start, end)).build();
+        Request request = new Request.Builder().url(getDownloadURL(code, start, end))
+                .addHeader("Connection", "keep-alive").build();
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.body() != null) {
                 createFile(filePath, response.body().bytes());
