@@ -9,7 +9,6 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.jxch.capital.breath.a.model.Stock;
 import org.jxch.capital.breath.a.model.StockSector;
-import org.jxch.capital.breath.a.service.dc.StockSectorDC;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -20,7 +19,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,8 +32,7 @@ public class SWStockSectorDCService implements StockSectorDC {
     @PostConstruct
     private void init() {
         try {
-            File file = ResourceUtils.getFile("classpath:sector/SW.html");
-            filePath = file.toPath();
+            filePath = ResourceUtils.getFile("classpath:sector/SW.html").toPath();
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
