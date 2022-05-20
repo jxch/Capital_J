@@ -1,14 +1,28 @@
- eureka:
+server:
+  port: 11001
+
+eureka:
   client:
     service-url:
       defaultZone: http://admin:admin@jkm.jiangxicheng.xyz:10001/eureka/
     register-with-eureka: true
     fetch-registry: true
   instance:
+    hostname: ${hostname:localhost}
     prefer-ip-address: true
 
- spring:
-   application:
-     name: Capital-Breath-A
-   profiles:
-     active: ${env:dev}
+spring:
+  application:
+    name: Capital-Breath-A
+  profiles:
+    active: ${env:dev}
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://qbh.jiangxicheng.xyz:3306/capital?serverTimezone=GMT%2B8
+    username: root
+    password: jiang155.
+    hikari:
+      connection-timeout: 30000
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
