@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class SWStockSectorDCService implements StockSectorDC {
-    private final Resource file = new ClassPathResource("sector/SW.htm");
+    private final Resource file = new ClassPathResource("sector/SW.html");
 
     @Override
     public List<StockSector> getStockSectors() {
