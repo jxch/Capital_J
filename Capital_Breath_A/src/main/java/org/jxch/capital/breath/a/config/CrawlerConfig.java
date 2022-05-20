@@ -12,9 +12,9 @@ public class CrawlerConfig {
     @Bean
     public OkHttpClient okHttpClient() {
         return new OkHttpClient().newBuilder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60, TimeUnit.SECONDS)
+                .readTimeout(100, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .build();
     }
