@@ -1,6 +1,6 @@
 FROM openjdk:11-jdk
 VOLUME /tmp
-ADD Capital-DC-A.jar app.jar
+ADD Capital-Breath-A.jar app.jar
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
