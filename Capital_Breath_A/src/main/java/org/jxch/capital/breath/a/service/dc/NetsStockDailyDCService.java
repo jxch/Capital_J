@@ -34,7 +34,7 @@ public class NetsStockDailyDCService implements StockDailyDC {
     @PostConstruct
     private void init() {
         try {
-            folderPath = Paths.get(new ClassPathResource("").getFile().getAbsolutePath() + "stock/daily");
+            folderPath = Paths.get(new ClassPathResource("").getFile().getAbsolutePath() + "/stock/daily");
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
             }
