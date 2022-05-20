@@ -69,11 +69,10 @@ public class NetsStockDailyDCService implements StockDailyDC {
     public List<StockKLine> getDailyKLineSortedByDate(String code, Date start, Date end) {
         Path filePath = getFilePath(code);
         Request request = new Request.Builder().url(getDownloadURL(code, start, end)).build();
-        log.info("request:" + code);
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.body() != null) {
                 createFile(filePath, response.body().bytes());
-            } else throw new RuntimeException("请求无返回, 请检查目标网站状态!");
+            } else throw new RuntimeException("No Response!");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
