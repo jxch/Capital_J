@@ -25,7 +25,7 @@ public class BreathTask {
 
     @PostConstruct
     private void init() {
-//        breathToDatabaseTask();
+        breathToDatabaseTask();
     }
 
     @Transactional
