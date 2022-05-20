@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.text.csv.CsvData;
 import cn.hutool.core.text.csv.CsvRow;
 import cn.hutool.core.text.csv.CsvUtil;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class NetsStockDailyDCService implements StockDailyDC {
     private Path folderPath;
@@ -67,6 +69,7 @@ public class NetsStockDailyDCService implements StockDailyDC {
     public List<StockKLine> getDailyKLineSortedByDate(String code, Date start, Date end) {
         Path filePath = getFilePath(code);
         Request request = new Request.Builder().url(getDownloadURL(code, start, end)).build();
+        log.info("request:" + code);
         try (Response response = okHttpClient.newCall(request).execute()) {
             if (response.body() != null) {
                 createFile(filePath, response.body().bytes());
