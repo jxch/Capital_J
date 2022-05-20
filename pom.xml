@@ -17,6 +17,7 @@
     <modules>
         <module>Capital_Eureka</module>
         <module>Capital_DC_A</module>
+        <module>Capital_Breath_A</module>
     </modules>
 
     <name>Capital_Java</name>

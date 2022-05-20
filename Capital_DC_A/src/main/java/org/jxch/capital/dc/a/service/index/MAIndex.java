@@ -28,8 +28,9 @@ public class MAIndex {
     }
 
     public static List<MAKLine> getMAKLinesSortedByDate(@NotNull List<StockKLine> kLines, int ma) {
-        return IntStream.range(0, kLines.size()).mapToObj(i ->
-                new MAKLine(kLines.get(i), kLines.subList(i, i + ma).stream().map(StockKLine::getClose)
+        return IntStream.range(0, kLines.size() - ma).mapToObj(i ->
+                new MAKLine(kLines.get(i),
+                        kLines.subList(i, i + ma).stream().map(StockKLine::getClose)
                         .reduce(BigDecimal.ZERO, BigDecimal::add)
                         .divide(new BigDecimal(ma), RoundingMode.HALF_UP))
         ).collect(Collectors.toList());
@@ -37,14 +38,14 @@ public class MAIndex {
 
     @Data
     @AllArgsConstructor
-    public static class MAKLine {
-        private StockKLine kLine;
+    public static class MAKLine  {
+        private StockKLine stockKLine;
         private BigDecimal ma;
     }
 
     @Data
     @AllArgsConstructor
-    public static class StockMAKLine{
+    public static class MAKLines {
         private String code;
         private List<MAKLine> makLines;
     }
