@@ -1,6 +1,15 @@
 spring:
   application:
-    name: Capital-DC-A[DEV]
+    name: Capital-Breath-A[DEV]
   datasource:
     hikari:
       connection-timeout: 3000000
+
+logging:
+  level:
+    org:
+      jxch:
+        capital:
+          breath:
+            a:
+              mapper: trace

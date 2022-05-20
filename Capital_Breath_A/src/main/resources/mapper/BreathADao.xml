@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jxch.capital.breath.a.mapper.BreathADao">
+    <resultMap id="BaseResultMap" type="org.jxch.capital.breath.a.domain.BreathA">
+        <id column="date" jdbcType="DATE" property="date"/>
+        <id column="sector" jdbcType="VARCHAR" property="sector"/>
+        <result column="score" jdbcType="INTEGER" property="score"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        `date` , sector, score
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="org.jxch.capital.breath.a.domain.BreathAKey"
+            resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from breath_a
+        where `date` = #{date,jdbcType=DATE}
+        and sector = #{sector,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="org.jxch.capital.breath.a.domain.BreathAKey">
+        delete
+        from breath_a
+        where `date` = #{date,jdbcType=DATE}
+          and sector = #{sector,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="org.jxch.capital.breath.a.domain.BreathA">
+        insert into breath_a (`date`, sector, score)
+        values (#{date,jdbcType=DATE}, #{sector,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="org.jxch.capital.breath.a.domain.BreathA">
+        insert into breath_a
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="date != null">
+                `date`,
+            </if>
+            <if test="sector != null">
+                sector,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="date != null">
+                #{date,jdbcType=DATE},
+            </if>
+            <if test="sector != null">
+                #{sector,jdbcType=VARCHAR},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <insert id="inserts">
+        insert into breath_a (`date`, sector, score) values
+        <foreach collection="records" item="item" index="index" separator=",">
+            (#{item.date,jdbcType=DATE}, #{item.sector,jdbcType=VARCHAR}, #{item.score,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="org.jxch.capital.breath.a.domain.BreathA">
+        update breath_a
+        <set>
+            <if test="score != null">
+                score = #{score,jdbcType=INTEGER},
+            </if>
+        </set>
+        where `date` = #{date,jdbcType=DATE}
+        and sector = #{sector,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="org.jxch.capital.breath.a.domain.BreathA">
+        update breath_a
+        set score = #{score,jdbcType=INTEGER}
+        where `date` = #{date,jdbcType=DATE}
+          and sector = #{sector,jdbcType=VARCHAR}
+    </update>
+</mapper>
