@@ -9,16 +9,12 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.jxch.capital.breath.a.model.Stock;
 import org.jxch.capital.breath.a.model.StockSector;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,13 +23,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class SWStockSectorDCService implements StockSectorDC {
-    private Path filePath;
+    private File file;
 
     @PostConstruct
     private void init() {
         try {
-            filePath = ResourceUtils.getFile("classpath:sector/SW.html").toPath();
-        } catch (FileNotFoundException e) {
+            file = new ClassPathResource("sector/SW.html").getFile();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -45,12 +41,12 @@ public class SWStockSectorDCService implements StockSectorDC {
 
     @NotNull
     private List<StockSector> convert() {
-        if (!Files.exists(filePath, LinkOption.NOFOLLOW_LINKS))
+        if (!file.exists())
             throw new RuntimeException("No File!");
 
         Map<String, List<Stock>> stockSectors;
         try {
-            String html = FileUtils.readFileToString(new File(filePath.toAbsolutePath().toString()), "GB2312");
+            String html = FileUtils.readFileToString(file, "GB2312");
             Document doc = Jsoup.parse(html);
             Elements elements = doc.select("tr");
 
