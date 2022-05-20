@@ -28,7 +28,7 @@ public class SWStockSectorDCService implements StockSectorDC {
     @PostConstruct
     private void init() {
         try {
-            file = new ClassPathResource("sector/SW.html").getFile();
+            file = new ClassPathResource("/sector/SW.htm", this.getClass().getClassLoader()).getFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
