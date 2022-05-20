@@ -15,7 +15,7 @@ spring:
   application:
     name: Capital-Breath-A
   profiles:
-    active: ${env:dev}
+    active: ${env:bate}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://qbh.jiangxicheng.xyz:3306/capital?serverTimezone=GMT%2B8&useSSL=false
