@@ -23,11 +23,6 @@ public class BreathTask {
         this.breathService = breathService;
     }
 
-    @PostConstruct
-    private void init() {
-        breathToDatabaseTask();
-    }
-
     @Transactional
     @Scheduled(cron = "0 0 8 * * ?")
     public void breathToDatabaseTask() {
