@@ -34,6 +34,7 @@ public class NetsStockDailyDCService implements StockDailyDC {
     @PostConstruct
     private void init() {
         try {
+            // todo 改为参数配置
             folderPath = Paths.get("/data/stock/daily");
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
