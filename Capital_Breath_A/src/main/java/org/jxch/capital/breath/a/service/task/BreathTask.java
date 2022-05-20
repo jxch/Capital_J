@@ -1,6 +1,7 @@
 package org.jxch.capital.breath.a.service.task;
 
 import cn.hutool.core.date.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.jxch.capital.breath.a.mapper.BreathADao;
 import org.jxch.capital.breath.a.mapstruct.BreathAConvert;
 import org.jxch.capital.breath.a.model.StockSectorScore;
@@ -9,10 +10,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.List;
 
+@Slf4j
 @Service
 public class BreathTask {
     private final BreathService breathService;
@@ -30,6 +31,7 @@ public class BreathTask {
                 DateUtil.parse("2020-01-01"),
                 DateUtil.parse(DateUtil.today()));
 
+        log.info("to sql!");
         dao.truncate();
         breath.forEach(scores -> dao.inserts(BreathAConvert.INSTANCE.toBreathA(scores)));
     }
