@@ -17,6 +17,6 @@ public class CrawlerConfig {
                 .readTimeout(10, TimeUnit.SECONDS)
                 .retryOnConnectionFailure(true)
                 .build();
-
     }
+
 }
