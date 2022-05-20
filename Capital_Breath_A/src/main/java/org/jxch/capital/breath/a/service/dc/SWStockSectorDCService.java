@@ -11,9 +11,11 @@ import org.jxch.capital.breath.a.model.Stock;
 import org.jxch.capital.breath.a.model.StockSector;
 import org.jxch.capital.breath.a.service.dc.StockSectorDC;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -31,16 +33,12 @@ public class SWStockSectorDCService implements StockSectorDC {
 
     @PostConstruct
     private void init() {
-        Path folder = Paths.get("src/main/resources/sector");
-        boolean desk = Files.exists(folder);
-        if (!desk) {
-            try {
-                Files.createDirectories(folder);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        try {
+            File file = ResourceUtils.getFile("classpath:sector/SW.html");
+            filePath = file.toPath();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
         }
-        filePath = Paths.get(folder + "/SW.html");
     }
 
     @Override
@@ -51,7 +49,7 @@ public class SWStockSectorDCService implements StockSectorDC {
     @NotNull
     private List<StockSector> convert() {
         if (!Files.exists(filePath, LinkOption.NOFOLLOW_LINKS))
-            throw new RuntimeException("没有文件存在, 请检查目标网站的状态");
+            throw new RuntimeException("No File!");
 
         Map<String, List<Stock>> stockSectors;
         try {
