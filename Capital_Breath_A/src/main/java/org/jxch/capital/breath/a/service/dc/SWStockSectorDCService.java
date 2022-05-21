@@ -54,6 +54,7 @@ public class SWStockSectorDCService implements StockSectorDC {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        log.info("Sector scan success.");
 
         return stockSectors.keySet().stream()
                 .map(key -> new StockSector(key, stockSectors.get(key)))
