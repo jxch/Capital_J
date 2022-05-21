@@ -50,7 +50,6 @@ public class SWStockSectorDCService implements StockSectorDC {
                 String name = tds.get(2).text();
                 stockSectors.putIfAbsent(sector, new ArrayList<>());
                 stockSectors.get(sector).add(new Stock(code, name, sector));
-                log.info("解析成功: {} {} {}", code, name, sector);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
