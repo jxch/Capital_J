@@ -59,7 +59,7 @@ public class BreathService implements Breath {
         mkLines.forEach(makLines -> makLines.getMakLines().forEach(makLine -> {
             Date date = makLine.getStockKLine().getDate();
             scores.putIfAbsent(date, 0);
-            if (makLine.getMa().compareTo(makLine.getStockKLine().getClose()) > 0) {
+            if (makLine.getMa().compareTo(makLine.getStockKLine().getClose()) < 0) {
                 scores.put(date, scores.get(date) + 1);
             }
         }));
