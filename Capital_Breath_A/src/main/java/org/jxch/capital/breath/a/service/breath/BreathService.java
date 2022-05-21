@@ -12,6 +12,7 @@ import org.jxch.capital.breath.a.utils.MAIndexUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -36,6 +37,12 @@ public class BreathService implements Breath {
             List<StockSectorScore> sectorScores = sectorScoreSortedByDate(stockSector.getName(), mkLines, stockSector.getCodes().size());
             breaths.add(sectorScores);
             log.info("{} success.", stockSector.getName());
+
+            try {
+                TimeUnit.MINUTES.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         return breaths;
     }
