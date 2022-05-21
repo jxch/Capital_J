@@ -2,7 +2,6 @@ package org.jxch.capital.breath.a.service.dc;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jsoup.Jsoup;
@@ -11,17 +10,13 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.jxch.capital.breath.a.model.Stock;
 import org.jxch.capital.breath.a.model.StockSector;
-import org.jxch.capital.breath.a.utils.CharsetUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +50,7 @@ public class SWStockSectorDCService implements StockSectorDC {
                 String name = tds.get(2).text();
                 stockSectors.putIfAbsent(sector, new ArrayList<>());
                 stockSectors.get(sector).add(new Stock(code, name, sector));
-                log.info("{} {} {}", code, name, sector);
+                log.info("解析成功: {} {} {}", code, name, sector);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

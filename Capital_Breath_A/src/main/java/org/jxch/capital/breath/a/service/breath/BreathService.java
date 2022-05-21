@@ -35,7 +35,7 @@ public class BreathService implements Breath {
             List<StockMAKLines> mkLines = computeMA(kLines, ma);
             List<StockSectorScore> sectorScores = sectorScoreSortedByDate(stockSector.getName(), mkLines, stockSector.getCodes().size());
             breaths.add(sectorScores);
-            log.info(stockSector.getName() + " success.");
+            log.info("{} success.", stockSector.getName());
         }
         return breaths;
     }
