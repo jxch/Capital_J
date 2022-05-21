@@ -18,7 +18,7 @@ spring:
     active: ${env:bate}
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://qbh.jiangxicheng.xyz:3306/capital?serverTimezone=GMT%2B8&useSSL=false
+    url: jdbc:mysql://qbh.jiangxicheng.xyz:3306/capital?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8
     username: root
     password: jiang155.
     hikari:
