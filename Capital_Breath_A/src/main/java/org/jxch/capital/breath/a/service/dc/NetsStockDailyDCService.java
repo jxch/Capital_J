@@ -10,7 +10,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 import org.jxch.capital.breath.a.model.StockKLine;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;

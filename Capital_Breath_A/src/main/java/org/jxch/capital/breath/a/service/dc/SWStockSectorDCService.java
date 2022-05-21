@@ -1,6 +1,7 @@
 package org.jxch.capital.breath.a.service.dc;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.jetbrains.annotations.NotNull;
@@ -10,6 +11,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.jxch.capital.breath.a.model.Stock;
 import org.jxch.capital.breath.a.model.StockSector;
+import org.jxch.capital.breath.a.utils.CharsetUtils;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
@@ -19,12 +21,14 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class SWStockSectorDCService implements StockSectorDC {
     private final Resource file = new ClassPathResource("sector/SW.html");
@@ -41,17 +45,17 @@ public class SWStockSectorDCService implements StockSectorDC {
             String html = IOUtils.toString(bis, "GB2312");
             Document doc = Jsoup.parse(html);
             Elements elements = doc.select("tr");
+            elements.remove(0);
 
             stockSectors = new HashMap<>();
             for (Element element : elements) {
                 Elements tds = element.select("td");
-                if (tds.size() > 0) {
-                    String sector = tds.get(0).text();
-                    String code = tds.get(1).text();
-                    String name = tds.get(2).text();
-                    stockSectors.putIfAbsent(sector, new ArrayList<>());
-                    stockSectors.get(sector).add(new Stock(code, name, sector));
-                }
+                String sector = tds.get(0).text();
+                String code = tds.get(1).text();
+                String name = tds.get(2).text();
+                stockSectors.putIfAbsent(sector, new ArrayList<>());
+                stockSectors.get(sector).add(new Stock(code, name, sector));
+                log.info("{} {} {}", code, name, sector);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
