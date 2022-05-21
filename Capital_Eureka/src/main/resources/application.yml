@@ -6,4 +6,4 @@ spring:
       name: ${username:admin}
       password: ${password:admin}
   profiles:
-    active: ${env:dev}
+    active: ${env:bate}
