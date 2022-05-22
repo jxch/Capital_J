@@ -25,7 +25,7 @@ public class BreathTask {
     }
 
     @Transactional
-    @Scheduled(cron = "0 0 8 * * ?")
+    @Scheduled(cron = "0 0 11 * * ?")
     public void breathToDatabaseTask() {
         List<List<StockSectorScore>> breath = breathService.breathByMA(20,
                 DateUtil.parse("2020-01-01"),
