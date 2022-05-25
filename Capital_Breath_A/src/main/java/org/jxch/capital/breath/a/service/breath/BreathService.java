@@ -31,12 +31,21 @@ public class BreathService implements Breath {
     public List<List<StockSectorScore>> breathByMA(int ma, Date start, Date end) {
         List<List<StockSectorScore>> breaths = new ArrayList<>();
         List<StockSector> stockSectors = sectorDC.getStockSectors();
+        int i = 0;
         for (StockSector stockSector : stockSectors) {
             List<StockKLines> kLines = stockDailyDC.dailyKLineSortedByDate(stockSector.getCodes(), start, end);
             List<StockMAKLines> mkLines = computeMA(kLines, ma);
             List<StockSectorScore> sectorScores = sectorScoreSortedByDate(stockSector.getName(), mkLines, stockSector.getCodes().size());
             breaths.add(sectorScores);
             log.info("{} success.", stockSector.getName());
+
+            if (++i % 7 == 0) {
+                try {
+                    TimeUnit.MINUTES.sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
         return breaths;
     }
