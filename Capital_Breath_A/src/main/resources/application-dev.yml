@@ -4,6 +4,7 @@ spring:
   datasource:
     hikari:
       connection-timeout: 3000000
+    url: jdbc:mysql://aws.jiangxicheng.xyz:3306/capital?serverTimezone=GMT%2B8&useSSL=false&useUnicode=true&characterEncoding=utf-8
 
 logging:
   level:

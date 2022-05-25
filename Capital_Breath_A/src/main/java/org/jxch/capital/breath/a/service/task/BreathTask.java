@@ -8,7 +8,6 @@ import org.jxch.capital.breath.a.model.StockSectorScore;
 import org.jxch.capital.breath.a.service.breath.BreathService;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,7 +23,6 @@ public class BreathTask {
         this.breathService = breathService;
     }
 
-    @Transactional
     @Scheduled(cron = "0 0 11 * * ?")
     public void breathToDatabaseTask() {
         List<List<StockSectorScore>> breath = breathService.breathByMA(20,
